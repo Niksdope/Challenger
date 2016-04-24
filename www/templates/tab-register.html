@@ -1,0 +1,53 @@
+<ion-view hide-nav-bar="true">
+  <ion-content class="padding">
+      <h3 style="text-align: center">Register</h3>
+      <form name="Registerform">
+        <div class="list list-inset">
+          <label class="item item-input">
+            <span class="input-label">E-mail</span>
+            <input type="email" name="email" ng-model="registerVars.email" ng-minlength="5" ng-required>
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Password</span>
+            <input type="password" name="password" ng-model="registerVars.password" ng-minlength="6" ng-required="password">
+          </label>
+        </div>
+        <div class="padding">
+            <p ng-show="Registerform.email.$error.required">* E-mail is required</p>
+            <p ng-show="Registerform.email.$invalid && !Registerform.email.$pristine">* E-mail is required</p>
+            <p ng-show="Registerform.email.$error.minlength">* E-mail has to be at least 5 characters long</p>
+            <p ng-show="Registerform.password.$error.required">* Password is required</p>
+            <p ng-show="Registerform.password.$error.minlength">* Password has to be at least 6 characters long</p>
+        </div>
+        <div class="padding">
+            <button type="button" class="button button-block button-calm" ng-disabled="Registerform.$invalid" data-ng-click="register()">Register</button>
+        </div>
+      </form>
+      
+      <p class="assertive">{{response}}</p>
+      
+      <h3 style="text-align: center">Or, Sign in</h3>
+      <form name="Loginform">
+        <div class="list list-inset">
+          <label class="item item-input">
+            <span class="input-label">E-mail</span>
+            <input type="email" name="email" ng-model="loginVars.email" ng-minlength="5" ng-required>
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Password</span>
+            <input type="password" name="password" ng-model="loginVars.password" ng-minlength="6" ng-required="password">
+          </label>
+        </div>
+        <div class="padding">
+            <p ng-show="Loginform.email.$error.required">* E-mail is required</p>
+            <p ng-show="Loginform.email.$invalid && !Registerform.email.$pristine">* E-mail is required</p>
+            <p ng-show="Loginform.email.$error.minlength">* E-mail has to be at least 5 characters long</p>
+            <p ng-show="Loginform.password.$error.required">* Password is required</p>
+            <p ng-show="Loginform.password.$error.minlength">* Password has to be at least 6 characters long</p>
+        </div>
+        <div class="padding">
+            <button type="button" class="button button-block button-calm" ng-disabled="Loginform.$invalid" data-ng-click="login()">Login</button>
+        </div>
+      </form>
+  </ion-content>
+</ion-view>

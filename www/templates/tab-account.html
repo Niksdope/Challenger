@@ -1,0 +1,18 @@
+<ion-view hide-nav-bar="true" view-title="Account">
+  <ion-content>
+      <button class="button button-calm" ng-click="logOut()">Sign out</button>
+      <div ng-hide="user.admin">
+          <p>Hello admin {{storage.email}}</p>
+          <div class="item item-input-inset">
+              <label class="item-input-wrapper">
+                <span class="input-label">Challenge</span>
+                <input type="text" ng-model="user.challenge">
+              </label>
+              <button class="button button-small" ng-click="addChallenge()">
+                Submit
+              </button>
+          </div>
+      <div>
+      <p>{{response}}</p>
+  </ion-content>
+</ion-view>
