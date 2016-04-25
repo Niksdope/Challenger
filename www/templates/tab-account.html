@@ -1,8 +1,15 @@
-<ion-view hide-nav-bar="true" view-title="Account">
-  <ion-content>
-      <button class="button button-calm" ng-click="logOut()">Sign out</button>
+<ion-view view-title="Account" >
+  <ion-content ng-init="getStatistics()">
+      <h3 style="text-align: center">Statistics for {{$storage.email}}</h3>
+      <div class="list">
+          <h2 class="item item-text-wrap">Total Challenges: {{statistics.total}}</h2>
+          <h2 class="item item-text-wrap">Completed Challenges: {{statistics.completed}}</h2>
+          <h2 class="item item-text-wrap">Percentage Challenges Completed: %{{percentage}}</h2>
+      </div>
+      <button class="button button-block button-calm" ng-click="logOut()">Sign out</button>
+      
       <div ng-hide="user.admin">
-          <p>Hello admin {{storage.email}}</p>
+          <p>As an admin, you can insert new challenges straight into the db</p>
           <div class="item item-input-inset">
               <label class="item-input-wrapper">
                 <span class="input-label">Challenge</span>
@@ -13,6 +20,9 @@
               </button>
           </div>
       <div>
+          
       <p>{{response}}</p>
+          
+      
   </ion-content>
 </ion-view>

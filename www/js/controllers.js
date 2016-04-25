@@ -94,9 +94,6 @@ angular.module('starter.controllers', ['ionic', 'ngStorage'])
 })
 
 .controller('ChallengesCtrl', function($scope, $http, $localStorage, $state) {
-    $scope.$on('$ionicView.enter', function(e) {
-       $state.go($state.current, {}, {reload:true}); 
-    });
     
     $scope.$storage = $localStorage;
     $scope.chals = [];
@@ -154,9 +151,6 @@ angular.module('starter.controllers', ['ionic', 'ngStorage'])
 })
 
 .controller('RegistryCtrl', function($scope, $http, $localStorage, $state) {
-    $scope.$on('$ionicView.enter', function(e) {
-       $state.go($state.current, {}, {reload:true}); 
-    });
     
     $scope.registerVars = {};
     $scope.loginVars = {};
@@ -260,24 +254,39 @@ angular.module('starter.controllers', ['ionic', 'ngStorage'])
     }
     
    
-        $scope.addChallenge = function() {
-            console.log("Submitting");
-            if($scope.user.challenge != undefined){
-                $http({
-                method: 'GET',
-                url: 'http://ngurins.cloudapp.net/createChallenge.php',
-                params: {challenge : $scope.challenge}
-                }).success(function(data) {
-                    $scope.response = data;
-                    console.log("Success");
-                })
-                  .error(function(data) {
-                    $scope.response = data;
-                    console.log("Fail");
-                })
-            }
-            else {
-                $scope.response = "Can't add an empty challenge :(";
-            }
+    $scope.addChallenge = function() {
+        console.log("Submitting");
+        if($scope.user.challenge != undefined){
+            $http({
+            method: 'GET',
+            url: 'http://ngurins.cloudapp.net/createChallenge.php',
+            params: {challenge : $scope.user.challenge}
+            }).success(function(data) {
+                $scope.response = data;
+                console.log("Success");
+            })
+              .error(function(data) {
+                $scope.response = data;
+                console.log("Fail");
+            })
         }
+        else {
+            $scope.response = "Can't add an empty challenge";
+        }
+    }
+    
+    $scope.getStatistics = function() {
+        $http({
+        method: 'GET',
+        url: 'http://ngurins.cloudapp.net/statistics.php',
+        params: {email : $scope.$storage.email}
+        }).success(function(data) {
+            $scope.statistics = data;
+            $scope.percentage = ($scope.statistics.completed / $scope.statistics.total) * 100;
+            $scope.percentage = $scope.percentage.toFixed(2);
+        })
+          .error(function(data) {
+            console.log("Failed to get statistics");
+        })
+    }
 });
