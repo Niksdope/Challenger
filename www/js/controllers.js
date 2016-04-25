@@ -150,7 +150,7 @@ angular.module('starter.controllers', ['ionic', 'ngStorage'])
     
 })
 
-.controller('RegistryCtrl', function($scope, $http, $localStorage, $state) {
+.controller('RegistryCtrl', function($scope, $http, $localStorage, $state, $window) {
     
     $scope.registerVars = {};
     $scope.loginVars = {};
@@ -177,8 +177,8 @@ angular.module('starter.controllers', ['ionic', 'ngStorage'])
                     $scope.$storage.email = $scope.registerVars.email;
                     $scope.$storage.loggedIn = true;
                     $scope.$storage.type = 'normal';
-                    
-                    $state.go('tab.dash');
+                    $window.location.reload(true);
+                    //$state.go('tab.dash');
                 }
                 else {
                     $scope.response = "User already exists";
@@ -217,8 +217,8 @@ angular.module('starter.controllers', ['ionic', 'ngStorage'])
                 $scope.$storage.email = $scope.loginVars.email;
                 $scope.$storage.loggedIn = true;
                 $scope.$storage.type = data;
-
-                $state.go('tab.dash');
+                $window.location.reload(true);
+                //$state.go('tab.dash');
             }   
         })
           .error(function(data) {
